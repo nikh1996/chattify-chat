@@ -1,0 +1,43 @@
+<% include ./includes/header.ejs %>
+<link rel='stylesheet' href='/stylesheets/index.css' />
+
+  <body class="text-center">
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+          <div class="col-12 chattify-div">
+              <h1><%= title %></h1>
+              <p>Welcome to <%= title %>!</p>
+
+              <div class="input-group">
+                  <input type="text" class="form-control form-control-lg" id="chat_name" name="chat_name" placeholder="Enter your name!" aria-describedby="message_textbox">
+                  <div class="input-group-prepend">
+                    <button type="button" class="btn btn-lg btn-primary send-button" onclick="check_user()">Start your conversation!</button>
+                  </div>
+                </div>
+          </div>   
+        </div>
+      </div>
+
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content" style="border-radius: .4rem;">
+              <form action="/chat" method="post">
+              <div class="modal-header" id="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+              </div>
+              <div class="modal-body">
+                <div id="modal_body_msg"></div>
+                <input type="hidden" name="username_hidden" id="username_hidden">
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="back_button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" id="continue_button" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+  </body>
+
+  <% include ./includes/footer.ejs %>
+  <script src="/javascripts/index.js"></script>

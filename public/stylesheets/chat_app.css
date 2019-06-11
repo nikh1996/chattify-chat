@@ -1,0 +1,37 @@
+.new_user_prompt {
+    background-color: #007bff !important;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.new_user_prompt_dark {
+    background-color: #1d2124 !important;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.chat-currentuser-light {
+    background-color: #007bff;
+    color: white;
+}
+
+.chat-otheruser-light {
+    background-color: #004ea2;
+    color: white;
+}
+
+.chat-currentuser-dark {
+    background-color: #000f1d;
+    color: white;
+    border: 1px solid #000f1d;
+}
+
+.chat-otheruser-dark {
+    background-color: #111;
+    color: white;
+    border: 1px solid #222;
+}
