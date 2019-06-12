@@ -18,22 +18,28 @@ app.io = io;
 
 /* START -- Chat functionality */
 var numUsers = 0;
+var onlineUsers = [];
 
 io.on( "connection", function( socket ) {
   var addedUser = false;
 
   socket.on('add user', (username) => {
-    socket.username = username;
+    if(onlineUsers.indexOf(username) === -1 && socket.username!==username) {
+      socket.username = username;
+      onlineUsers.push(username);
 
-    ++numUsers;
-    addedUser = true;
+      ++numUsers;
+      addedUser = true;
 
-    io.emit('user login', username);
+      io.emit('user login', { current_username: username, users: onlineUsers});
 
-    socket.broadcast.emit('user joined', {
-      username: socket.username,
-      numUsers: numUsers
-    });
+      socket.broadcast.emit('user joined', {
+        username: socket.username,
+        numUsers: numUsers
+      });
+    } else {
+      console.log('This name is taken')
+    }
   });
 
   socket.on('chat message', (msg) => {

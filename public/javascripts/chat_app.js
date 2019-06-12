@@ -41,9 +41,9 @@ $(function () {
 
     socket.on('user login', function(data) {
       let current_user = $('#hidden_user').val();
-      let username = data+' has';
+      let username = data.current_username+' has';
 
-      if(current_user === data) username = 'You have';
+      if(current_user === data.current_username) username = 'You have';
 
       let theme_message = "new_user_prompt_dark";
       if($('body').hasClass('light-theme')) theme_message = "new_user_prompt";
