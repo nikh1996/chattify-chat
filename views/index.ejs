@@ -1,43 +1,56 @@
 <% include ./includes/header.ejs %>
 <link rel='stylesheet' href='/stylesheets/index.css' />
 
-  <body class="text-center">
-    <div class="container h-100">
-        <div class="row h-100 justify-content-center align-items-center">
-          <div class="col-12 chattify-div">
-              <h1><%= title %></h1>
-              <p>Welcome to <%= title %>!</p>
+<body class="text-center">
+  <div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-12 chattify-div" id="username_div">
+        <h1><%= title %></h1>
+        <p>The place to chat without restrictions!</p>
 
-              <div class="input-group">
-                  <input type="text" class="form-control form-control-lg" id="chat_name" name="chat_name" placeholder="Enter your name!" aria-describedby="message_textbox">
-                  <div class="input-group-prepend">
-                    <button type="button" class="btn btn-lg btn-primary send-button" onclick="check_user()">Start your conversation!</button>
-                  </div>
-                </div>
-          </div>   
-        </div>
-      </div>
-
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content" style="border-radius: .4rem;">
-              <form action="/chat" method="post">
-              <div class="modal-header" id="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-              </div>
-              <div class="modal-body">
-                <div id="modal_body_msg"></div>
-                <input type="hidden" name="username_hidden" id="username_hidden">
-              </div>
-              <div class="modal-footer">
-                <button type="button" id="back_button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" id="continue_button" class="btn btn-primary">Save changes</button>
-              </div>
-            </form>
-            </div>
+        <div class="input-group">
+          <input type="text" class="form-control form-control-lg" id="chat_name" name="chat_name"
+            placeholder="Enter your name!" aria-describedby="message_textbox">
+          <div class="input-group-prepend">
+            <button type="button" class="btn btn-lg btn-primary send-button" onclick="check_user()">Start your
+              conversation!</button>
           </div>
         </div>
-  </body>
+      </div>
+      <div class="col-12 chattify-div" id="room_div" style="display: none;">
+        <h1 id="user_greeting"></h1>
+        <p>Create or join a room to continue!</p>
 
-  <% include ./includes/footer.ejs %>
-  <script src="/javascripts/index.js"></script>
+        <div id="create_room_buttons">
+          <button type="button" onclick="room_div_options('create_room')" class="btn btn-primary">Create a room!</button>
+          <button type="button" onclick="room_div_options('join_room')" class="btn btn-success">Join a room!</button>
+        </div>
+
+        <div id="create_room_div" style="display: none;">
+          <div class="input-group">
+            <input type="text" class="form-control form-control-lg" id="create_room_name" name="create_room_name"
+              placeholder="Enter your chat room name!" aria-describedby="message_textbox">
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn-lg btn-primary send-button" onclick="check_user()">Enter the room!</button>
+            </div>
+          </div><br>
+          <a href="#" onclick="room_div_options('join_room')">I would join a room instead...</a>
+        </div>
+
+        <div id="join_room_div" style="display: none;">
+          <div class="input-group">
+            <input type="text" class="form-control form-control-lg" id="join_room_name" name="join_room_name"
+              placeholder="Enter your room id provided by the room owner!" aria-describedby="message_textbox">
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn-lg btn-success send-button" onclick="check_user()">Enter the room!</button>
+            </div>
+          </div><br>
+          <a href="#" onclick="room_div_options('create_room')">I would create a room instead...</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<% include ./includes/footer.ejs %>
+<script src="/javascripts/index.js"></script>

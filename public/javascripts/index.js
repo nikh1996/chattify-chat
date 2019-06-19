@@ -17,19 +17,40 @@ $(function () {
     $('#username_hidden').val(username);
 
     if(username == '') {
-      $('#exampleModalCenter').modal('show');
-      $('#modal-header').addClass('stranger-dark').removeClass('btn-primary');
-      $('#exampleModalCenterTitle').html('<i class="fas fa-user-secret"></i>&nbsp;&nbsp;Wanna be a stranger?');
-      $('#modal_body_msg').html('You have not entered your name... Do you want to continue as a Guest or do you want to enter your name?');
-      $('#continue_button').html('Continue as Guest');
-      $('#back_button').html('Back to the naming board!');
+      $('#chat_name').addClass('error-input');
+    } else {
+      $('#chat_name').removeClass('error-input');
+      $('#username_div').css('display','none');
+      $('#room_div').fadeIn();
+      $('#user_greeting').text('Hey '+username+'!');
     }
-    else {
-      $('#exampleModalCenter').modal('show');
-      $('#modal-header').removeClass('stranger-dark').addClass('btn-primary');
-      $('#exampleModalCenterTitle').html('<i class="far fa-user"></i>&nbsp;&nbsp;Ready to chat?');
-      $('#modal_body_msg').html('The name you entered is <b>'+username+'</b>! Do you confirm this as your username for the session?');
-      $('#continue_button').html('Continue as '+username);
-      $('#back_button').html('Back to the naming board!');
+  }
+
+  function create_room() {
+    let username = $('#chat_name').val();
+    $('#username_hidden').val(username);
+
+    if(username == '') {
+      $('#chat_name').addClass('error-input');
+    } else {
+      $('#chat_name').removeClass('error-input');
+      $('#username_div').css('display','none');
+      $('#room_div').fadeIn();
+      $('#user_greeting').text('Hey '+username+'!');
+    }
+  }
+
+  function room_div_options(type) {
+    if(type === 'create_room') {
+      $('#create_room_buttons, #join_room_div').css('display','none');
+      $('#create_room_div').fadeIn();
+    }
+    if(type === 'join_room') {
+      $('#create_room_div, #create_room_buttons').css('display','none');
+      $('#join_room_div').fadeIn();
+    }
+    if(type === 'room_button') {
+      $('#create_room_div, #join_room_div').css('display','none');
+      $('#create_room_buttons').fadeIn();
     }
   }
