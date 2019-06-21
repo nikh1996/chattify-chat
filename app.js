@@ -9,8 +9,24 @@ const helmet = require('helmet');
 const indexRouter = require('./routes/index');
 const chatRouter = require('./routes/chat');
 
+const keys = require('./config/keys');
+
 const app = express();
 const socket_io = require('socket.io');
+
+const session = require('express-session');
+
+app.use(session({
+  secret: keys.session_key,
+  resave: false,
+  rolling: true,
+  saveUninitialized: true,
+  // cookie: { 
+  //     secure: true,
+  //     httpOnly: true,
+  //     maxAge: 10800000 
+  // }
+}))
 
 // Socket.io
 var io = socket_io();

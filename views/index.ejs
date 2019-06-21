@@ -27,25 +27,31 @@
         </div>
 
         <div id="create_room_div" style="display: none;">
-          <div class="input-group">
-            <input type="text" class="form-control form-control-lg" id="create_room_name" name="create_room_name"
-              placeholder="Enter your chat room name!" aria-describedby="message_textbox">
-            <div class="input-group-prepend">
-              <button type="button" class="btn btn-lg btn-primary send-button" onclick="check_user()">Enter the room!</button>
-            </div>
-          </div><br>
-          <a href="#" onclick="room_div_options('join_room')">I would join a room instead...</a>
+          <form action="/chatroom/create_join_room/create" method="post">
+            <div class="input-group">
+              <input type="hidden" id="username_hidden_create" name="username">
+              <input type="text" class="form-control form-control-lg" id="create_room_name" name="create_room_name"
+                placeholder="Enter your chat room name!" aria-describedby="message_textbox">
+              <div class="input-group-prepend">
+                <button type="submit" class="btn btn-lg btn-primary send-button">Enter the room!</button>
+              </div>
+            </div><br>
+            <a href="#" onclick="room_div_options('join_room')">I would join a room instead...</a>
+          </form>
         </div>
 
         <div id="join_room_div" style="display: none;">
-          <div class="input-group">
-            <input type="text" class="form-control form-control-lg" id="join_room_name" name="join_room_name"
-              placeholder="Enter your room id provided by the room owner!" aria-describedby="message_textbox">
-            <div class="input-group-prepend">
-              <button type="button" class="btn btn-lg btn-success send-button" onclick="check_user()">Enter the room!</button>
-            </div>
-          </div><br>
-          <a href="#" onclick="room_div_options('create_room')">I would create a room instead...</a>
+          <form action="/chatroom/create_join_room/join" method="post">
+            <div class="input-group">
+              <input type="hidden" id="username_hidden_join" name="username">
+              <input type="text" class="form-control form-control-lg" id="join_room_id" name="join_room_id"
+                placeholder="Enter your room id provided by the room owner!" aria-describedby="message_textbox">
+              <div class="input-group-prepend">
+                <button type="submit" class="btn btn-lg btn-success send-button">Enter the room!</button>
+              </div>
+            </div><br>
+            <a href="#" onclick="room_div_options('create_room')">I would create a room instead...</a>
+          </form>
         </div>
       </div>
     </div>
