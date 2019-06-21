@@ -9,24 +9,29 @@ const helmet = require('helmet');
 const indexRouter = require('./routes/index');
 const chatRouter = require('./routes/chat');
 
-const keys = require('./config/keys');
-
 const app = express();
 const socket_io = require('socket.io');
 
 const session = require('express-session');
 
-app.use(session({
-  secret: keys.session_key,
+const env_mode = process.env.NODE_ENV; // Check if app is in DEV mode or PRODUCTION mode
+
+let session_key = process.env.session_key;
+session_key = session_key.trim();
+
+let app_session = app.use(session({
+  secret: session_key,
   resave: false,
   rolling: true,
   saveUninitialized: true,
-  // cookie: { 
-  //     secure: true,
-  //     httpOnly: true,
-  //     maxAge: 10800000 
-  // }
+  cookie: {}
 }))
+
+// Set secure cookies if app is in PRODUCTION mode
+if(env_mode === 'production') {
+  app_session.cookie.secure = true;
+  app_session.cookie.httpOnly = true;
+}
 
 // Socket.io
 var io = socket_io();
@@ -40,7 +45,6 @@ io.on( "connection", function( socket ) {
   var addedUser = false;
 
   socket.on('add user', (username) => {
-    if(onlineUsers.indexOf(username) === -1 && socket.username!==username) {
       socket.username = username;
       onlineUsers.push(username);
 
@@ -53,9 +57,6 @@ io.on( "connection", function( socket ) {
         username: socket.username,
         numUsers: numUsers
       });
-    } else {
-      console.log('This name is taken')
-    }
   });
 
   socket.on('chat message', (msg) => {
