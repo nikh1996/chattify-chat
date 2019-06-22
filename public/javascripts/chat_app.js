@@ -9,6 +9,8 @@ $(function () {
       if($('#chat_message').val() != '') {
         socket.emit('chat message', $('#chat_message').val());
         $('#chat_message').val('');
+      } else { // Focus input field if empty message is sent
+        $('#chat_message').focus(); 
       }
     });
 

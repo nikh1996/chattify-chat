@@ -14,12 +14,14 @@
   <div class="message-box-div">
     <div class="input-group">
       <div class="input-group-prepend">
-        <button class="btn btn-lg btn-dark" data-toggle="tooltip" data-placement="top" title="Switch to dark theme!" onclick="toggle_theme();" id="dark_light"><i id="dark_light_icon" class="far fa-moon"></i></button>
+        <button class="btn btn-lg btn-dark" data-toggle="tooltip" data-placement="top" title="Switch to dark theme!" onclick="toggle_theme();" id="dark_light" aria-describedby="dark_light_sr"><i id="dark_light_icon" class="far fa-moon"></i></button>
       </div>
-      <input type="text" class="form-control form-control-lg" id="chat_message" placeholder="Hey <%= user %>! Type your message!" aria-describedby="message_textbox" required>
+      <input type="text" class="form-control form-control-lg" id="chat_message" placeholder="Hey <%= user %>! Type your message!" aria-describedby="chat_message_sr" required>
       <div class="input-group-prepend">
-        <button class="btn btn-lg btn-primary send-button" id="send_msg">Send&nbsp;&nbsp;<i class="fab fa-telegram-plane"></i></button>
+        <button class="btn btn-lg btn-primary send-button" id="send_msg">Send&nbsp;&nbsp;<i class="fab fa-telegram-plane" aria-hidden="true"></i></button>
       </div>
+      <p id="chat_message_sr" hidden>Enter your message here</p>
+      <p id="dark_light_sr" hidden>Switch between light mode or dark mode</p>
     </div>
   </div>
 </body>
