@@ -45,7 +45,6 @@ router.post('/create_join_room/:type', function(req, res, next) {
 
     create_room.save(function (err, result) {
       if (err) {
-        console.error(err);
         res.redirect('/');
       }
     });
@@ -70,13 +69,21 @@ router.post('/create_join_room/:type', function(req, res, next) {
 router.get('/room/:room_id', function(req, res, next) {
   let room_id = req.params.room_id;
   let username = req.session.username;
+  let room_name = "Global chat"
 
   if(username === undefined || username === '') {
     res.redirect('/');
   } else {
-    if(room_id === '') room_id = "Global";
-  
-    res.render('chat_app', { title: 'Chattify room', user: username });
+    room.findOne({ roomId: room_id }, function(err, result) {
+      if(err) {
+        res.redirect('/');
+      } else {
+        if(result.roomName !== undefined && result.roomName !== null && result.roomName !== '') {
+          room_name = result.roomName;
+        }
+        res.render('chat_app', { title: 'Chattify room', user: username, room_name: room_name });
+      }
+    });  
   }
 });
 

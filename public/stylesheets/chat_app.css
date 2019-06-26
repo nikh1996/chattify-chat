@@ -1,3 +1,19 @@
+.room_name {
+    background-color: #007bff !important;
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.room_name_dark {
+    background-color: rgba(0,0,0,0.9) !important;
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 1rem 1rem 0 0;
+}
+
 .new_user_prompt {
     background-color: #007bff !important;
     color: white;

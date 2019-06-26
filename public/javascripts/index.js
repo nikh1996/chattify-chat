@@ -18,8 +18,6 @@ function check_user() {
   let username = $('#chat_name').val();
   $('#username_hidden_create, #username_hidden_join').val(username);
 
-  console.log(username);
-
   if (username === '') {
     $('#chat_name').addClass('error-input');
   } else {

@@ -81,6 +81,9 @@ $(function () {
       $('#message_area').addClass('chat-area-dark').removeClass('chat-area-light');
       $('#chat_message').addClass('chat-text-dark');
 
+      // The group room name color change
+      $('.user_prompt').addClass('room_name_dark').removeClass('room_name');
+
       // The user prompt color change
       $('.user_prompt').addClass('new_user_prompt_dark').removeClass('new_user_prompt');
 
@@ -93,6 +96,9 @@ $(function () {
       $('#dark_light_icon').removeClass('fa-sun').addClass('fa-moon');
       $('#message_area').removeClass('chat-area-dark').addClass('chat-area-light');
       $('#chat_message').removeClass('chat-text-dark');
+
+      // The group room name color change
+      $('.user_prompt').addClass('room_name').removeClass('room_name_dark');
 
       // The user prompt color change
       $('.user_prompt').addClass('new_user_prompt').removeClass('new_user_prompt_dark');

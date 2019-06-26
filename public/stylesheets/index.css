@@ -18,3 +18,12 @@ body, html {
 .error-input {
     border: 1px solid red;
 }
+
+.normal_chat {
+    width: 15rem;
+}
+
+.global_chat {
+    width: 30rem;
+    margin-bottom: 1rem;
+}

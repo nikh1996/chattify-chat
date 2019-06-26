@@ -30,8 +30,12 @@
         <p>Create or join a room to continue!</p>
 
         <div id="create_room_buttons">
-          <button type="button" onclick="room_div_options('create_room')" class="btn btn-primary">Create a room!</button>
-          <button type="button" onclick="room_div_options('join_room')" class="btn btn-success">Join a room!</button>
+          <a href="/chatroom/room/Global" class="btn btn-warning global_chat">🔥 Go to Global Chat! 🔥</a><br>
+
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" onclick="room_div_options('create_room')" class="btn btn-primary normal_chat">Create a room!</button>
+            <button type="button" onclick="room_div_options('join_room')" class="btn btn-success normal_chat">Join a room!</button>
+          </div>
         </div>
 
         <div id="create_room_div" style="display: none;">
@@ -45,7 +49,10 @@
                 <button type="submit" class="btn btn-lg btn-primary send-button">Enter the room!</button>
               </div>
             </div><br>
-            <a href="#" onclick="room_div_options('join_room')">I would join a room instead...</a>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="/chatroom/room/Global" class="btn btn-warning normal_chat">🔥 Go to Global Chat! 🔥</a>
+              <button type="button" onclick="room_div_options('join_room')" class="btn btn-success normal_chat">Join a room!</button>
+            </div>
           </form>
         </div>
 
@@ -60,7 +67,10 @@
                 <button type="submit" class="btn btn-lg btn-success send-button">Enter the room!</button>
               </div>
             </div><br>
-            <a href="#" onclick="room_div_options('create_room')">I would create a room instead...</a>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="/chatroom/room/Global" class="btn btn-warning normal_chat">🔥 Go to Global Chat! 🔥</a>
+              <button type="button" onclick="room_div_options('create_room')" class="btn btn-primary normal_chat">Create a room!</button>
+            </div>
           </form>
         </div>
       </div>
