@@ -61,3 +61,11 @@ a {
 .btn-dark {
   color: yellow !important;
 }
+
+.left-position {
+  text-align: left;
+}
+
+.right-position {
+  text-align: right;
+}

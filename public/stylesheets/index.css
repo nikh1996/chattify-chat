@@ -27,3 +27,9 @@ body, html {
     width: 30rem;
     margin-bottom: 1rem;
 }
+
+.logout-button {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}

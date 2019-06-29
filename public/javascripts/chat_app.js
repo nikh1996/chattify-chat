@@ -82,7 +82,7 @@ $(function () {
       $('#chat_message').addClass('chat-text-dark');
 
       // The group room name color change
-      $('.user_prompt').addClass('room_name_dark').removeClass('room_name');
+      $('#room_name').addClass('room_name_dark').removeClass('room_name');
 
       // The user prompt color change
       $('.user_prompt').addClass('new_user_prompt_dark').removeClass('new_user_prompt');
@@ -90,6 +90,9 @@ $(function () {
       // The user messages color change
       $('.currentuser_message').addClass('chat-currentuser-dark').removeClass('chat-currentuser-light');
       $('.otheruser_message').addClass('chat-otheruser-dark').removeClass('chat-otheruser-light');
+
+      // Logout modal color change
+      $('#logout_theme_change').addClass('logout-dark-theme').removeClass('logout-light-theme');
     } else {  // Light mode
       $('body').removeClass('dark-theme').addClass('light-theme');
       $('#dark_light').removeClass('btn-warning').addClass('btn-dark').attr('data-original-title','Switch to dark theme!').tooltip('show');
@@ -98,7 +101,7 @@ $(function () {
       $('#chat_message').removeClass('chat-text-dark');
 
       // The group room name color change
-      $('.user_prompt').addClass('room_name').removeClass('room_name_dark');
+      $('#room_name').addClass('room_name').removeClass('room_name_dark');
 
       // The user prompt color change
       $('.user_prompt').addClass('new_user_prompt').removeClass('new_user_prompt_dark');
@@ -106,5 +109,8 @@ $(function () {
       // The user messages color change
       $('.currentuser_message').addClass('chat-currentuser-light').removeClass('chat-currentuser-dark');
       $('.otheruser_message').addClass('chat-otheruser-light').removeClass('chat-otheruser-dark');
+
+      // Logout modal color change
+      $('#logout_theme_change').addClass('logout-light-theme').removeClass('logout-dark-theme');
     }
   }

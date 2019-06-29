@@ -57,6 +57,33 @@ router.post('/create_join_room/:type', function(req, res, next) {
       if(err || result === null) {
         res.redirect('/');
       } else {
+        let allowedUsers = result.allowedUsers;
+        let usersJoined = result.usersJoined;
+        console.log(current_user, allowedUsers, allowedUsers.length, usersJoined, usersJoined.indexOf(current_user));
+        if(allowedUsers.length > 0) {
+          if(allowedUsers.indexOf(current_user) === -1) {
+            res.redirect('/');
+            return;
+          }
+        }
+
+        if(usersJoined.indexOf(current_user) === -1) {
+          room.findOneAndUpdate(
+          { roomId: room_id }, 
+          { 
+            $push: { 
+              usersJoined: current_user
+            } 
+          },
+          function (error, success) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log(success);
+            }
+          })
+        }
+
         res.redirect('/chatroom/room/'+room_id);
       }
     });
@@ -69,7 +96,7 @@ router.post('/create_join_room/:type', function(req, res, next) {
 router.get('/room/:room_id', function(req, res, next) {
   let room_id = req.params.room_id;
   let username = req.session.username;
-  let room_name = "Global chat"
+  let room_name = "Global chat";
 
   if(username === undefined || username === '') {
     res.redirect('/');
@@ -78,8 +105,10 @@ router.get('/room/:room_id', function(req, res, next) {
       if(err) {
         res.redirect('/');
       } else {
-        if(result.roomName !== undefined && result.roomName !== null && result.roomName !== '') {
-          room_name = result.roomName;
+        if(result) {
+          if(result.roomName !== undefined && result.roomName !== null && result.roomName !== '') {
+            room_name = result.roomName;
+          }
         }
         res.render('chat_app', { title: 'Chattify room', user: username, room_name: room_name });
       }

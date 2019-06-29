@@ -6,11 +6,15 @@
   <button id="people_online_nav_button" onclick="openNav()" class="btn btn-primary"><i class="far fa-grin-beam"></i>&nbsp;&nbsp;&nbsp;People Online</button>
 
   <div class="row">
-    <div class="col-lg-4"></div>
-    <div class="col-lg-4 room_name">
+    <div class="col-lg-4">
+        <a href="/" class="btn btn-primary"><i class="fas fa-angle-left"></i>&nbsp;&nbsp;Back to rooms</a>
+    </div>
+    <div class="col-lg-4 room_name" id="room_name">
       <h4><%= room_name %></h4>
     </div>
-    <div class="col-lg-4"></div>
+    <div class="col-lg-4 right-position">
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#logout_prompt">Logout&nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></button>
+    </div>
   </div>
 
   <div class="container-fluid chat-area-light" id='message_area'>
@@ -34,6 +38,7 @@
   </div>
 </body>
 
+<% include ./includes/logout.ejs %>
 <% include ./includes/footer.ejs %>
 
 <script src="/socket.io/socket.io.js"></script>

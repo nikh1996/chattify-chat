@@ -16,4 +16,10 @@ router.post('/', function(req, res, next) {
   res.redirect('/');
 });
 
+router.get('/logout', function(req, res, next) {
+  req.session.destroy();
+  
+  res.redirect('/');
+});
+
 module.exports = router;

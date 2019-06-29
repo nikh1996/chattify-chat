@@ -26,6 +26,7 @@
       <% } else { %>
       
       <div class="col-12 chattify-div" id="room_div">
+        <button type="button" class="btn btn-danger logout-button" data-toggle="modal" data-target="#logout_prompt">Logout&nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></button>
         <h1 id="user_greeting">Hey <%= username %>!</h1>
         <p>Create or join a room to continue!</p>
 
@@ -81,5 +82,6 @@
   </div>
 </body>
 
+<% include ./includes/logout.ejs %>
 <% include ./includes/footer.ejs %>
 <script src="/javascripts/index.js"></script>

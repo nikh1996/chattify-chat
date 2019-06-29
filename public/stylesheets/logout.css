@@ -1,0 +1,43 @@
+#logout_prompt {
+    margin: 23rem auto;
+}
+
+.logout-light-theme > .modal-header {
+    background-color: #c9302c !important;
+    border-radius: 0px;
+    color: white;
+    display: inline-block;
+}
+
+.logout-light-theme > .modal-footer {
+    background-color: #ffe5e7 !important;
+}
+
+.logout-dark-theme > .modal-header {
+    background-color: rgba(0,0,0,0.9) !important;
+    border-radius: 0px;
+    color: white;
+    display: inline-block;
+}
+
+.logout-dark-theme > .modal-body {
+    background-color: black !important;
+    color: white;
+}
+
+.logout-dark-theme > .modal-footer {
+    background-color: rgba(0,0,0,0.9) !important;
+    border-radius: 0px;
+}
+
+.logout-no {
+    padding: 0.5rem 1.5rem;
+}
+
+.logout-yes {
+    padding: 0.4rem 1rem;
+}
+
+.modal-body > p {
+    margin: 0;
+}
