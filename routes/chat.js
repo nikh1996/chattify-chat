@@ -29,6 +29,7 @@ router.get('/room', function(req, res, next) {
 
 // Create or join a room based on the paramaters
 router.post('/create_join_room/:type', function(req, res, next) {
+  let session = req.session;
   let current_user = req.session.username;
 
   let type = req.params.type;
@@ -45,7 +46,10 @@ router.post('/create_join_room/:type', function(req, res, next) {
 
     create_room.save(function (err, result) {
       if (err) {
+        session.error = err.message;
+        session.error_msg = "There seems to be an issue while creating the room. Please try again later!";
         res.redirect('/');
+        return;
       }
     });
   
@@ -55,13 +59,17 @@ router.post('/create_join_room/:type', function(req, res, next) {
 
     room.findOne({ roomId: room_id }, function(err, result) {
       if(err || result === null) {
+        session.error = "";
+        if(err) session.error = err.message;
+        session.error_msg = "This room does not exist! Please enter the correct id...";
         res.redirect('/');
       } else {
         let allowedUsers = result.allowedUsers;
         let usersJoined = result.usersJoined;
-        console.log(current_user, allowedUsers, allowedUsers.length, usersJoined, usersJoined.indexOf(current_user));
         if(allowedUsers.length > 0) {
           if(allowedUsers.indexOf(current_user) === -1) {
+            session.error = "";
+            session.error_msg = "You don't have access to this chat! Ask the room owner to allow you!";
             res.redirect('/');
             return;
           }
@@ -77,7 +85,8 @@ router.post('/create_join_room/:type', function(req, res, next) {
           },
           function (error, success) {
             if (error) {
-              console.log(error);
+              session.error = error.message;
+              session.error_msg = "There seems to be an issue in joining this chat! Please try again later...";
             } else {
               console.log(success);
             }
@@ -88,12 +97,15 @@ router.post('/create_join_room/:type', function(req, res, next) {
       }
     });
   } else {
+    session.error = "Wrong type. Indirect entry tried...";
+    session.error_msg = "There seems to be an issue, Please try again later!";
     res.redirect('/');
   }
 });
 
 // Redirect to either Global room or user inputted room based on UUID
 router.get('/room/:room_id', function(req, res, next) {
+  let session = req.session;
   let room_id = req.params.room_id;
   let username = req.session.username;
   let room_name = "Global chat";
@@ -103,7 +115,10 @@ router.get('/room/:room_id', function(req, res, next) {
   } else {
     room.findOne({ roomId: room_id }, function(err, result) {
       if(err) {
+        session.error = err.message;
+        session.error_msg = "This room does not exist! Please enter the correct id...";
         res.redirect('/');
+        return;
       } else {
         if(result) {
           if(result.roomName !== undefined && result.roomName !== null && result.roomName !== '') {

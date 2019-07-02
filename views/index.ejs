@@ -78,6 +78,12 @@
 
       <% } %>
 
+      <% if(error !== '') { %>
+        <div class="bg-danger error-msg-div">
+          <%= error %>
+        </div>
+      <% } %>
+
     </div>
   </div>
 </body>

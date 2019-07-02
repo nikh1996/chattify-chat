@@ -33,3 +33,12 @@ body, html {
     right: 1rem;
     top: 1rem;
 }
+
+.error-msg-div {
+    position: relative;
+    top: -13rem;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+    color: white;
+}
