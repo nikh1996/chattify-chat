@@ -69,6 +69,15 @@ io.on( "connection", function( socket ) {
 app.use(helmet());
 app.use(compression());
 
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    styleSrc: ["'self'", "'unsafe-inline'", 'stackpath.bootstrapcdn.com', 'use.fontawesome.com'],
+    fontSrc: ["'self'", 'use.fontawesome.com'],
+    scriptSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com', 'stackpath.bootstrapcdn.com']
+  }
+}))
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
