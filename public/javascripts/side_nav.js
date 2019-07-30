@@ -19,6 +19,6 @@ socket.on('user login', function(data) {
     let onlineUsers = data.users;
 
     onlineUsers.forEach(function(x) {
-        $('#people_online_div').append('<div class="row"><h5 style="color: white;" href="#">'+x+'</h5></div>');
+        $('#people_online_div').append('<div class="col-xs-12"><h5 class="white_color" href="#">'+x+'</h5></div>');
     })
 });

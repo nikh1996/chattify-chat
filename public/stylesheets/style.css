@@ -69,3 +69,7 @@ a {
 .right-position {
   text-align: right;
 }
+
+.dispnone {
+  display: none;
+}

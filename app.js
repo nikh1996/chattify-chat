@@ -41,10 +41,11 @@ app.io = io;
 var numUsers = 0;
 var onlineUsers = [];
 
-io.on( "connection", function( socket ) {
+io.on( "connection", (socket) => {
   var addedUser = false;
 
   socket.on('add user', (username) => {
+    if(onlineUsers.indexOf(username) === -1) {
       socket.username = username;
       onlineUsers.push(username);
 
@@ -57,6 +58,7 @@ io.on( "connection", function( socket ) {
         username: socket.username,
         numUsers: numUsers
       });
+    }
   });
 
   socket.on('chat message', (msg) => {
@@ -72,9 +74,9 @@ app.use(compression());
 app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'"],
-    styleSrc: ["'self'", "'unsafe-inline'", 'stackpath.bootstrapcdn.com', 'use.fontawesome.com'],
+    styleSrc: ["'self'", 'stackpath.bootstrapcdn.com', 'use.fontawesome.com'],
     fontSrc: ["'self'", 'use.fontawesome.com'],
-    scriptSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com', 'stackpath.bootstrapcdn.com']
+    scriptSrc: ["'self'", 'cdnjs.cloudflare.com', 'stackpath.bootstrapcdn.com']
   }
 }))
 

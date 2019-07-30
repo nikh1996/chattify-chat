@@ -51,3 +51,12 @@
     color: white;
     border: 1px solid #222;
 }
+
+.currentuser_message, .otheruser_message {
+    min-width: 50rem; 
+    max-width: 80rem;
+}
+
+.card-body {
+    padding: 0.8rem;
+}

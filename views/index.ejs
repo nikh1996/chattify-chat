@@ -7,18 +7,45 @@
 
       <% if(username === '') { %>
 
-      <div class="col-12 chattify-div" id="username_div">
+      <div class="col-12 chattify-div" id="login_div">
         <h1><%= title %></h1>
         <p>The place to chat without restrictions!</p>
 
-        <form action="/" method="post" id="user_session_form">
-          <div class="input-group">
-            <input type="text" class="form-control form-control-lg" id="chat_name" name="chat_name"
-              placeholder="Enter your name!" aria-describedby="chat_name_sr" aria-required="true">
-            <p id="chat_name_sr" hidden>Enter the name to start chatting</p>
-            <div class="input-group-prepend">
-              <button type="button" onclick="check_user()" class="btn btn-lg btn-primary send-button">Start your conversation!</button>
+        <form action="/login" method="post" id="login_session_form">
+          <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 col-xs-12">
+              <input type="text" class="form-control form-control-lg" id="login_username" name="login_username" placeholder="Enter your username!" aria-describedby="login_username_sr" aria-required="true"><br>
+              <p id="login_username_sr" hidden>Enter your username</p>
+              <input type="password" class="form-control form-control-lg" id="login_password" name="login_password" placeholder="Enter your password!" aria-describedby="login_password_sr" aria-required="true"><br>
+              <p id="login_password_sr" hidden>Enter your password</p>
+              <button type="button" id="login_button" class="btn btn-lg btn-primary send-button">Login to start chatting!</button><br>
             </div>
+            <div class="col-sm-3"></div>
+          </div><br>
+          Not yet an user? <a href="#" id="register_button_href">Register to start chatting!</a>
+        </form>
+      </div>
+
+      <div class="col-12 chattify-div dispnone" id="register_div">
+        <h1><%= title %></h1>
+        <p>The place to chat without restrictions!</p>
+
+        <form action="/register" method="post" id="register_session_form">
+          <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 col-xs-12">
+              <input type="text" class="form-control form-control-lg" id="register_displayname" name="register_displayname" placeholder="Enter your display name!" aria-describedby="register_displayname_sr" aria-required="true"><br>
+              <p id="register_displayname_sr" hidden>Enter your display name</p>
+              <input type="text" class="form-control form-control-lg" id="register_username" name="register_username" placeholder="Enter your username!" aria-describedby="register_username_sr" aria-required="true"><br>
+              <p id="register_username_sr" hidden>Enter your username</p>
+              <input type="password" class="form-control form-control-lg" id="register_password" name="register_password" placeholder="Enter your password!" aria-describedby="register_password_sr" aria-required="true"><br>
+              <p id="register_password_sr" hidden>Enter your password</p>
+              <button type="button" id="register_button" class="btn btn-lg btn-primary send-button">Register to start chatting!</button>
+              <br><br>
+              A chattify user? <a href="#" id="login_button_href">Login to start chatting!</a>
+            </div>
+            <div class="col-sm-3"></div>
           </div>
         </form>
       </div>
@@ -27,19 +54,19 @@
       
       <div class="col-12 chattify-div" id="room_div">
         <button type="button" class="btn btn-danger logout-button" data-toggle="modal" data-target="#logout_prompt">Logout&nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></button>
-        <h1 id="user_greeting">Hey <%= username %>!</h1>
+        <h1 id="user_greeting">Hey <%= displayname %>!</h1>
         <p>Create or join a room to continue!</p>
 
         <div id="create_room_buttons">
           <a href="/chatroom/room/Global" class="btn btn-warning global_chat">🔥 Go to Global Chat! 🔥</a><br>
 
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" onclick="room_div_options('create_room')" class="btn btn-primary normal_chat">Create a room!</button>
-            <button type="button" onclick="room_div_options('join_room')" class="btn btn-success normal_chat">Join a room!</button>
+            <button type="button" id="create_room_button_main_div" class="btn btn-primary normal_chat">Create a room!</button>
+            <button type="button" id="join_room_button_create_div" class="btn btn-success normal_chat">Join a room!</button>
           </div>
         </div>
 
-        <div id="create_room_div" style="display: none;">
+        <div id="create_room_div" class="dispnone">
           <form action="/chatroom/create_join_room/create" method="post">
             <div class="input-group">
               <input type="hidden" id="username_hidden_create" name="username">
@@ -52,12 +79,12 @@
             </div><br>
             <div class="btn-group" role="group" aria-label="Basic example">
               <a href="/chatroom/room/Global" class="btn btn-warning normal_chat">🔥 Go to Global Chat! 🔥</a>
-              <button type="button" onclick="room_div_options('join_room')" class="btn btn-success normal_chat">Join a room!</button>
+              <button type="button" id="join_room_button_create_div" class="btn btn-success normal_chat">Join a room!</button>
             </div>
           </form>
         </div>
 
-        <div id="join_room_div" style="display: none;">
+        <div id="join_room_div" class="dispnone">
           <form action="/chatroom/create_join_room/join" method="post">
             <div class="input-group">
               <input type="hidden" id="username_hidden_join" name="username">
@@ -70,7 +97,7 @@
             </div><br>
             <div class="btn-group" role="group" aria-label="Basic example">
               <a href="/chatroom/room/Global" class="btn btn-warning normal_chat">🔥 Go to Global Chat! 🔥</a>
-              <button type="button" onclick="room_div_options('create_room')" class="btn btn-primary normal_chat">Create a room!</button>
+              <button type="button" id="create_room_button_join_div" class="btn btn-primary normal_chat">Create a room!</button>
             </div>
           </form>
         </div>
