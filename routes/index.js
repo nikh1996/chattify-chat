@@ -150,9 +150,19 @@ router.post('/:type', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res, next) {
-  req.session.destroy();
-  
-  res.redirect('/');
+  let session = req.session;
+  let userId = req.session.userid;
+
+  user.updateOne(
+    { userId: userId }, 
+    { 
+      lastLogin: new Date()
+    },
+    function (error, success) {
+      session.destroy();
+      res.redirect('/');
+    }
+  )
 });
 
 module.exports = router;
