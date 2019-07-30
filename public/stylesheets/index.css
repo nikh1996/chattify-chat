@@ -20,11 +20,11 @@ body, html {
 }
 
 .normal_chat {
-    width: 15rem;
+    width: 50%;
 }
 
 .global_chat {
-    width: 30rem;
+    width: 100%;
     margin-bottom: 1rem;
 }
 
@@ -41,4 +41,17 @@ body, html {
     padding: 1rem;
     border-radius: 5px;
     color: white;
+}
+
+.btn-group {
+    width: 100%;
+}
+
+.send-button_xs {
+    width: 100%;
+}
+
+.normal_chat_xs {
+    width: 100%;
+    margin-bottom: 1vh;
 }

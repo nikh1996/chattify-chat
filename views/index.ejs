@@ -58,50 +58,101 @@
         <p>Create or join a room to continue!</p>
 
         <div id="create_room_buttons">
-          <a href="/chatroom/room/Global" class="btn btn-warning global_chat">🔥 Go to Global Chat! 🔥</a><br>
-
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" id="create_room_button_main_div" class="btn btn-primary normal_chat">Create a room!</button>
-            <button type="button" id="join_room_button_create_div" class="btn btn-success normal_chat">Join a room!</button>
+          <div class="row">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-8 col-xs-12">
+                  <a href="/chatroom/room/Global" class="btn btn-warning global_chat">🔥 Go to Global Chat! 🔥</a><br>
+        
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" id="create_room_button_main_div" class="btn btn-primary normal_chat">Create a room!</button>
+                    <button type="button" id="join_room_button_create_div" class="btn btn-success normal_chat">Join a room!</button>
+                  </div>
+              </div>
+              <div class="col-sm-2"></div>
           </div>
         </div>
 
         <div id="create_room_div" class="dispnone">
-          <form action="/chatroom/create_join_room/create" method="post">
-            <div class="input-group">
-              <input type="hidden" id="username_hidden_create" name="username">
-              <input type="text" class="form-control form-control-lg" id="create_room_name" name="create_room_name"
-                placeholder="Enter your chat room name!" aria-describedby="create_room_name_sr">
-              <p id="create_room_name_sr" hidden>Enter the name for your chat room</p>
-              <div class="input-group-prepend">
-                <button type="submit" class="btn btn-lg btn-primary send-button">Enter the room!</button>
+            <!-- START -- System interface -->
+            <div class="row d-none d-sm-block">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-8 col-xs-12">
+                <form action="/chatroom/create_join_room/create" method="post">
+                  <div class="input-group">
+                    <input type="hidden" id="username_hidden_create" name="username">
+                    <input type="text" class="form-control form-control-lg" id="create_room_name" name="create_room_name"
+                      placeholder="Enter your chat room name!" aria-describedby="create_room_name_sr">
+                    <p id="create_room_name_sr" hidden>Enter the name for your chat room</p>
+                    <div class="input-group-prepend">
+                      <button type="submit" class="btn btn-lg btn-primary send-button">Enter the room!</button>
+                    </div>
+                  </div><br>
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="/chatroom/room/Global" class="btn btn-warning normal_chat">🔥 Go to Global Chat! 🔥</a>
+                    <button type="button" id="join_room_button_create_div" class="btn btn-success normal_chat">Join a room!</button>
+                  </div>
+                </form>
               </div>
-            </div><br>
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="/chatroom/room/Global" class="btn btn-warning normal_chat">🔥 Go to Global Chat! 🔥</a>
-              <button type="button" id="join_room_button_create_div" class="btn btn-success normal_chat">Join a room!</button>
+              <div class="col-sm-2"></div>
             </div>
-          </form>
+            <!-- END -- System interface -->
+
+            <!-- START -- Mobile interface -->
+            <div class="row d-block d-sm-none">
+              <div class="col-xs-12">
+                <form action="/chatroom/create_join_room/create" method="post">
+                  <input type="hidden" id="username_hidden_create" name="username">
+                  <input type="text" class="form-control form-control-lg" id="create_room_name" name="create_room_name" placeholder="Enter your chatroom name!" aria-describedby="create_room_name_sr"><br>
+                  <p id="create_room_name_sr" hidden>Enter the name for your chat room</p>
+                  <button type="submit" class="btn btn-lg btn-primary send-button_xs">Enter the room!</button><br><br>
+                  <button type="button" id="join_room_button_create_div" class="btn btn-success normal_chat_xs">Join a room!</button><br>
+                  <a href="/chatroom/room/Global" class="btn btn-warning normal_chat_xs">🔥 Go to Global Chat! 🔥</a>
+                </form>
+              </div>
+            </div>
+            <!-- END -- Mobile interface -->
         </div>
 
         <div id="join_room_div" class="dispnone">
-          <form action="/chatroom/create_join_room/join" method="post">
-            <div class="input-group">
-              <input type="hidden" id="username_hidden_join" name="username">
-              <input type="text" class="form-control form-control-lg" id="join_room_id" name="join_room_id"
-                placeholder="Enter your room id provided by the room owner!" aria-describedby="join_room_id_sr">
-              <p id="join_room_id_sr" hidden>Enter the id of the existing chat room</p>
-              <div class="input-group-prepend">
-                <button type="submit" class="btn btn-lg btn-success send-button">Enter the room!</button>
-              </div>
-            </div><br>
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="/chatroom/room/Global" class="btn btn-warning normal_chat">🔥 Go to Global Chat! 🔥</a>
-              <button type="button" id="create_room_button_join_div" class="btn btn-primary normal_chat">Create a room!</button>
+          <!-- START -- System interface -->
+          <div class="row d-none d-sm-block">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8 col-xs-12">
+              <form action="/chatroom/create_join_room/join" method="post">
+                <div class="input-group">
+                  <input type="hidden" id="username_hidden_join" name="username">
+                  <input type="text" class="form-control form-control-lg" id="join_room_id" name="join_room_id"
+                    placeholder="Enter your room id provided by the room owner!" aria-describedby="join_room_id_sr">
+                  <p id="join_room_id_sr" hidden>Enter the id of the existing chat room</p>
+                  <div class="input-group-prepend">
+                    <button type="submit" class="btn btn-lg btn-success send-button">Enter the room!</button>
+                  </div>
+                </div><br>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <a href="/chatroom/room/Global" class="btn btn-warning normal_chat">🔥 Go to Global Chat! 🔥</a>
+                  <button type="button" id="create_room_button_join_div" class="btn btn-primary normal_chat">Create a room!</button>
+                </div>
+              </form>
             </div>
-          </form>
+            <div class="col-sm-2"></div>
+          </div>
+          <!-- END -- System interface -->
+
+          <!-- START -- Mobile interface -->
+          <div class="row d-block d-sm-none">
+              <div class="col-xs-12">
+                <form action="/chatroom/create_join_room/join" method="post">
+                    <input type="hidden" id="username_hidden_join" name="username">
+                    <input type="text" class="form-control form-control-lg" id="join_room_id" name="join_room_id" placeholder="Enter the room id!" aria-describedby="join_room_id_sr"><br>
+                    <p id="join_room_id_sr" hidden>Enter the id of the existing chat room</p>
+                    <button type="submit" class="btn btn-lg btn-success send-button_xs">Enter the room!</button><br><br>
+                    <button type="button" id="create_room_button_join_div" class="btn btn-primary normal_chat_xs">Create a room!</button><br>
+                    <a href="/chatroom/room/Global" class="btn btn-warning normal_chat_xs">🔥 Go to Global Chat! 🔥</a>
+                </form>
+              </div>
+            </div>
+            <!-- END -- Mobile interface -->
         </div>
-      </div>
 
       <% } %>
 
