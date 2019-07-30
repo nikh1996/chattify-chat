@@ -1,7 +1,7 @@
 #people_online_nav_button {
   position: fixed;
   right: -4rem;
-  top: 25rem;
+  top: 50%;
   transform: rotate(-90deg);
 }
 

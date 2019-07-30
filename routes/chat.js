@@ -108,6 +108,7 @@ router.get('/room/:room_id', function(req, res, next) {
   let session = req.session;
   let room_id = req.params.room_id;
   let username = req.session.username;
+  let displayname = req.session.displayname;
   let room_name = "Global chat";
 
   if(username === undefined || username === '') {
@@ -125,7 +126,7 @@ router.get('/room/:room_id', function(req, res, next) {
             room_name = result.roomName;
           }
         }
-        res.render('chat_app', { title: 'Chattify room', user: username, room_name: room_name });
+        res.render('chat_app', { title: 'Chattify room', user: displayname, room_name: room_name });
       }
     });  
   }

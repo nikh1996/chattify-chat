@@ -53,10 +53,18 @@
 }
 
 .currentuser_message, .otheruser_message {
-    min-width: 50rem; 
-    max-width: 80rem;
+    min-width: 60%; 
+    max-width: 100%;
 }
 
 .card-body {
     padding: 0.8rem;
+}
+
+.xs_width_100 {
+    width: 100%;
+}
+
+.xs_margin_bottom {
+    margin-bottom: 1vh;
 }

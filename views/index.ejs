@@ -14,7 +14,7 @@
         <form action="/login" method="post" id="login_session_form">
           <div class="row">
             <div class="col-sm-3"></div>
-            <div class="col-sm-6 col-xs-12">
+            <div class="col-sm-6 col-12">
               <input type="text" class="form-control form-control-lg" id="login_username" name="login_username" placeholder="Enter your username!" aria-describedby="login_username_sr" aria-required="true"><br>
               <p id="login_username_sr" hidden>Enter your username</p>
               <input type="password" class="form-control form-control-lg" id="login_password" name="login_password" placeholder="Enter your password!" aria-describedby="login_password_sr" aria-required="true"><br>
@@ -34,7 +34,7 @@
         <form action="/register" method="post" id="register_session_form">
           <div class="row">
             <div class="col-sm-3"></div>
-            <div class="col-sm-6 col-xs-12">
+            <div class="col-sm-6 col-12">
               <input type="text" class="form-control form-control-lg" id="register_displayname" name="register_displayname" placeholder="Enter your display name!" aria-describedby="register_displayname_sr" aria-required="true"><br>
               <p id="register_displayname_sr" hidden>Enter your display name</p>
               <input type="text" class="form-control form-control-lg" id="register_username" name="register_username" placeholder="Enter your username!" aria-describedby="register_username_sr" aria-required="true"><br>
@@ -59,8 +59,8 @@
 
         <div id="create_room_buttons">
           <div class="row">
-              <div class="col-sm-2"></div>
-              <div class="col-sm-8 col-xs-12">
+              <div class="col-sm-2 d-none d-sm-block"></div>
+              <div class="col-12 col-sm-8">
                   <a href="/chatroom/room/Global" class="btn btn-warning global_chat">🔥 Go to Global Chat! 🔥</a><br>
         
                   <div class="btn-group" role="group" aria-label="Basic example">
@@ -68,7 +68,7 @@
                     <button type="button" id="join_room_button_create_div" class="btn btn-success normal_chat">Join a room!</button>
                   </div>
               </div>
-              <div class="col-sm-2"></div>
+              <div class="col-sm-2 d-none d-sm-block"></div>
           </div>
         </div>
 
@@ -76,7 +76,7 @@
             <!-- START -- System interface -->
             <div class="row d-none d-sm-block">
               <div class="col-sm-2"></div>
-              <div class="col-sm-8 col-xs-12">
+              <div class="col-sm-8 col-12">
                 <form action="/chatroom/create_join_room/create" method="post">
                   <div class="input-group">
                     <input type="hidden" id="username_hidden_create" name="username">
@@ -99,7 +99,7 @@
 
             <!-- START -- Mobile interface -->
             <div class="row d-block d-sm-none">
-              <div class="col-xs-12">
+              <div class="col-12">
                 <form action="/chatroom/create_join_room/create" method="post">
                   <input type="hidden" id="username_hidden_create" name="username">
                   <input type="text" class="form-control form-control-lg" id="create_room_name" name="create_room_name" placeholder="Enter your chatroom name!" aria-describedby="create_room_name_sr"><br>
@@ -117,7 +117,7 @@
           <!-- START -- System interface -->
           <div class="row d-none d-sm-block">
             <div class="col-sm-2"></div>
-            <div class="col-sm-8 col-xs-12">
+            <div class="col-sm-8 col-12">
               <form action="/chatroom/create_join_room/join" method="post">
                 <div class="input-group">
                   <input type="hidden" id="username_hidden_join" name="username">
@@ -140,7 +140,7 @@
 
           <!-- START -- Mobile interface -->
           <div class="row d-block d-sm-none">
-              <div class="col-xs-12">
+              <div class="col-12">
                 <form action="/chatroom/create_join_room/join" method="post">
                     <input type="hidden" id="username_hidden_join" name="username">
                     <input type="text" class="form-control form-control-lg" id="join_room_id" name="join_room_id" placeholder="Enter the room id!" aria-describedby="join_room_id_sr"><br>

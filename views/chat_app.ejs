@@ -5,17 +5,37 @@
 
   <button id="people_online_nav_button" class="btn btn-primary"><i class="far fa-grin-beam"></i>&nbsp;&nbsp;&nbsp;People Online</button>
 
-  <div class="row">
-    <div class="col-lg-4">
+  <!-- START -- System interface -->
+  <div class="row d-none d-sm-flex">
+    <div class="col-sm-3">
         <a href="/" class="btn btn-primary"><i class="fas fa-angle-left"></i>&nbsp;&nbsp;Back to rooms</a>
     </div>
-    <div class="col-lg-4 room_name" id="room_name">
+    <div class="col-sm-6 room_name" id="room_name">
       <h4><%= room_name %></h4>
     </div>
-    <div class="col-lg-4 right-position">
+    <div class="col-sm-3 right-position">
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#logout_prompt">Logout&nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></button>
     </div>
   </div>
+  <!-- END -- System interface -->
+
+  <!-- START -- Mobile interface -->
+  <div class="row d-block d-sm-none">
+    <div class="row xs_margin_bottom">
+      <div class="col-6">
+          <a href="/" class="btn btn-primary xs_width_100"><i class="fas fa-angle-left"></i>&nbsp;&nbsp;Back to rooms</a>
+      </div>
+      <div class="col-6 right-position">
+        <button type="button" class="btn btn-danger xs_width_100" data-toggle="modal" data-target="#logout_prompt">Logout&nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 room_name" id="room_name">
+        <h4><%= room_name %></h4>
+      </div>
+    </div>
+  </div>
+  <!-- END -- Mobile interface -->
 
   <div class="container-fluid chat-area-light" id='message_area'>
   </div>
