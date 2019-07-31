@@ -11,6 +11,8 @@ a {
   position: fixed;
   width: 95%;
   bottom: 1.5rem;
+  left: 2.5vw;
+  right: 2.5vw;
 }
 
 .send-button {

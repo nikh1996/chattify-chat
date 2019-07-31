@@ -1,16 +1,22 @@
 $(function () {
-  let input = document.getElementById("chat_name");
 
-  if(input !== null && input !== undefined) {
-    input.addEventListener("keyup", function (event) {
-      // Cancel the default action, if needed
-      event.preventDefault();
-      // Number 13 is the "Enter" key on the keyboard
-      if (event.keyCode === 13) {
-        // Trigger the button element with a click
-        check_user();
-      }
-    });
+  let inputs_array = ['login_username', 'login_password', 'register_displayname', 'register_username', 'register_password'];
+
+  for (i = 0; i < inputs_array.length; i++) {
+    if(document.getElementById(inputs_array[i]) !== null && document.getElementById(inputs_array[i]) !== undefined) {
+      let id_name = inputs_array[i];
+      document.getElementById(inputs_array[i]).addEventListener("keyup", function (event) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+          // Trigger the button element with a click
+          if(id_name.indexOf('login') === -1) register_user();
+          else login_user();
+        }
+      });
+
+    }
   }
 });
 
