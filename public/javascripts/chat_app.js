@@ -37,6 +37,12 @@ $(function () {
       if(chat_position !== 'chat-currentuser') {
         template = '<div class="row"><div class="col-sm-7"><div class="card otheruser_message '+theme_message_otheruser+' mb-3"><div class="card-body"><h5 class="card-title">'+username+'</h5><p class="card-text">'+data.message+'</p></div></div></div><div class="col-sm-5"></div></div>';
       }
+
+      if(username !== 'You') {
+        Push.create(data.username, {
+          body: data.message
+        });
+      }
       
       $('#message_area').append(template);
     });
