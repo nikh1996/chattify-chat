@@ -7,7 +7,10 @@ $(function () {
 
     $('#send_msg').on("click", function(e){
       if($('#chat_message').val() != '') {
-        socket.emit('chat message', $('#chat_message').val());
+        let username = $('#hidden_user').val();
+        let message = $('#chat_message').val();
+
+        socket.emit('chat message', { username: username, message: message });
         $('#chat_message').val('');
       } else { // Focus input field if empty message is sent
         $('#chat_message').focus(); 
@@ -38,10 +41,25 @@ $(function () {
         template = '<div class="row"><div class="col-sm-7"><div class="card otheruser_message '+theme_message_otheruser+' mb-3"><div class="card-body"><h5 class="card-title">'+username+'</h5><p class="card-text">'+data.message+'</p></div></div></div><div class="col-sm-5"></div></div>';
       }
 
+      console.log(data.username, username, data.message);
+
       if(username !== 'You') {
-        Push.create(data.username, {
-          body: data.message
-        });
+        if(Push.Permission.has() === true) {
+          Push.create(data.username, {
+            body: data.message,
+            onClick: function () {
+                window.focus();
+                this.close();
+            }
+          });
+        } else {
+          Push.Permission.request().then(function(onGranted) {
+            console.log(onGranted);
+          })
+          .catch(function(onDenied) {
+            console.log(onDenied);
+          });
+        }
       }
       
       $('#message_area').append(template);
@@ -49,15 +67,33 @@ $(function () {
 
     socket.on('user login', function(data) {
       let current_user = $('#hidden_user').val();
-      let username = data.current_username+' has';
+      let username = data.current_username;
 
-      if(current_user === data.current_username) username = 'You have';
+      let people_online = data.users;
+      let people_online_count = (people_online.length - 1);
+      let people_online_template = "";
+      let people_online_template_message = "";
+
+      if(current_user === username) {
+        username = 'You have';
+
+        if(people_online_count === 0) people_online_template_message = "There is no one online right now...";
+        else people_online_template_message = "There are "+people_online_count+" people online right now!";
+
+      } else {
+        username = username+' has';
+      }
 
       let theme_message = "new_user_prompt_dark";
       if($('body').hasClass('light-theme')) theme_message = "new_user_prompt";
 
       let template = '<div class="row text-center"><div class="col-sm-4"></div><div class="col-sm-4 '+theme_message+' user_prompt">'+username+' joined the chat!</div><div class="col-sm-4"></div></div>&nbsp;';
       $('#message_area').append(template);
+
+      if(people_online_template_message !== "" && people_online_template_message !== undefined && people_online_template_message !== null) {
+        people_online_template = '<div class="row text-center"><div class="col-sm-4"></div><div class="col-sm-4 '+theme_message+' user_prompt">'+people_online_template_message+'</div><div class="col-sm-4"></div></div>&nbsp;';
+        $('#message_area').append(people_online_template);
+      }
     });
 
     socket.on('user joined', function(data) {

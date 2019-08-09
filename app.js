@@ -52,7 +52,7 @@ io.on( "connection", (socket) => {
       ++numUsers;
       addedUser = true;
 
-      io.emit('user login', { current_username: username, users: onlineUsers});
+      io.emit('user login', { current_username: username, users: onlineUsers });
 
       socket.broadcast.emit('user joined', {
         username: socket.username,
@@ -61,8 +61,8 @@ io.on( "connection", (socket) => {
     }
   });
 
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', { username: socket.username, message: msg });
+  socket.on('chat message', (data) => {
+    io.emit('chat message', { username: data.username, message: data.message });
   });
 });
 
