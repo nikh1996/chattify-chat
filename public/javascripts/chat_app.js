@@ -41,8 +41,6 @@ $(function () {
         template = '<div class="row"><div class="col-sm-7"><div class="card otheruser_message '+theme_message_otheruser+' mb-3"><div class="card-body"><h5 class="card-title">'+username+'</h5><p class="card-text">'+data.message+'</p></div></div></div><div class="col-sm-5"></div></div>';
       }
 
-      console.log(data.username, username, data.message);
-
       if(username !== 'You') {
         if(Push.Permission.has() === true) {
           Push.create(data.username, {
@@ -99,6 +97,16 @@ $(function () {
     socket.on('user joined', function(data) {
       console.log(data);
     });
+
+    socket.on('user disconnected', function(data) {
+      console.log(data);
+    });
+
+    // Disconnect socket for the user when logout
+    $('#logout-yes').on("click", function() {
+      let current_user = $('#hidden_user').val();
+      socket.emit('remove user', current_user);
+    })
 
     let input = document.getElementById("chat_message");
 

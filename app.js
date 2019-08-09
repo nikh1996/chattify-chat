@@ -64,6 +64,16 @@ io.on( "connection", (socket) => {
   socket.on('chat message', (data) => {
     io.emit('chat message', { username: data.username, message: data.message });
   });
+
+  socket.on('remove user', (data) => {
+    let user_index = onlineUsers.indexOf(data);
+    if (user_index > -1) {
+      onlineUsers.splice(user_index, 1);
+    }
+
+    socket.disconnect();
+    io.emit('user disconnected', { removed_username: data, users: onlineUsers });
+  });
 });
 
 /* END -- Chat functionality */

@@ -15,10 +15,18 @@ $('body').on("click", function() {
 })
 
 socket.on('user login', function(data) {
+    check_people_online(data);
+});
+
+socket.on('user disconnected', function(data) {
+    check_people_online(data);
+});
+
+function check_people_online(data) {
     $('#people_online_div').empty();
     let onlineUsers = data.users;
 
     onlineUsers.forEach(function(x) {
         $('#people_online_div').append('<div class="col-xs-12"><h5 class="white_color" href="#">'+x+'</h5></div>');
     })
-});
+}
