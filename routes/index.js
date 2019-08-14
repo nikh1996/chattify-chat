@@ -3,19 +3,9 @@ const router = express.Router();
 const uuidv4 = require('uuid/v4');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const connection = require('../config/db');
 
-const Schema = mongoose.Schema;
-
-const userSchema = new Schema({
-  userId: String,
-  displayName: String,
-  userName: String,
-  password: String,
-  createdDate: { type: Date, default: Date.now },
-  lastLogin: { type: Date, default: Date.now },
-  friendsList: Array,
-  blockedList: Array
-});
+const userSchema = connection.userSchema;
 
 const user = mongoose.model('User', userSchema);
 

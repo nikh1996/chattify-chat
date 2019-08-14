@@ -5,15 +5,7 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const connection = require('../config/db');
 
-const Schema = mongoose.Schema;
-
-const roomSchema = new Schema({
-  roomId: String,
-  roomName: String,
-  usersJoined: Array,
-  allowedUsers: Array,
-  createdDate: { type: Date, default: Date.now }
-});
+const roomSchema = connection.roomSchema;
 
 const room = mongoose.model('Room', roomSchema);
 
@@ -126,7 +118,7 @@ router.get('/room/:room_id', function(req, res, next) {
             room_name = result.roomName;
           }
         }
-        res.render('chat_app', { title: 'Chattify room', user: displayname, room_name: room_name });
+        res.render('chat_app', { title: 'Chattify room', room_id: room_id, user: displayname, room_name: room_name });
       }
     });  
   }

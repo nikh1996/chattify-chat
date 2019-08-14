@@ -1,6 +1,8 @@
 $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
+    let room_id = $('#hidden_room_id').val();
+
     var socket = io();
 
     socket.emit('add user', $('#hidden_user').val());
@@ -10,7 +12,7 @@ $(function () {
         let username = $('#hidden_user').val();
         let message = $('#chat_message').val();
 
-        socket.emit('chat message', { username: username, message: message });
+        socket.emit('chat message', { room_id: room_id, username: username, message: message });
         $('#chat_message').val('');
       } else { // Focus input field if empty message is sent
         $('#chat_message').focus(); 
@@ -92,6 +94,8 @@ $(function () {
         people_online_template = '<div class="row text-center"><div class="col-sm-4"></div><div class="col-sm-4 '+theme_message+' user_prompt">'+people_online_template_message+'</div><div class="col-sm-4"></div></div>&nbsp;';
         $('#message_area').append(people_online_template);
       }
+
+      get_chat_messages(room_id);
     });
 
     socket.on('user joined', function(data) {
@@ -171,4 +175,8 @@ function toggle_theme(mode) {
     // Logout modal color change
     $('#logout_theme_change').addClass('logout-light-theme').removeClass('logout-dark-theme');
   }
+}
+
+function get_chat_messages(room_id) {
+  console.log(room_id);
 }

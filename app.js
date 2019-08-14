@@ -5,6 +5,12 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const compression = require('compression');
 const helmet = require('helmet');
+const connection = require('./config/db');
+const mongoose = require('mongoose');
+
+const roomSchema = connection.roomSchema;
+
+const room = mongoose.model('Room', roomSchema);
 
 const indexRouter = require('./routes/index');
 const chatRouter = require('./routes/chat');
@@ -62,7 +68,22 @@ io.on( "connection", (socket) => {
   });
 
   socket.on('chat message', (data) => {
-    io.emit('chat message', { username: data.username, message: data.message });
+    room.findOneAndUpdate(
+      { roomId: data.room_id }, 
+      { 
+        $push: { 
+          messages: { username: data.username, message: data.message }
+        } 
+      },
+      function (error, success) {
+        if (error) {
+          console.log(error);
+        } else {
+          io.emit('chat message', { username: data.username, message: data.message });
+        }
+      }
+    );
+
   });
 
   socket.on('remove user', (data) => {
