@@ -20,49 +20,7 @@ $(function () {
     });
 
     socket.on('chat message', function(data){
-      let current_user = $('#hidden_user').val();
-      let username = data.username;
-      let chat_position = "chat-otheruser";
-
-      if(current_user === data.username) {
-        chat_position = "chat-currentuser";
-        username = "You";
-      }
-
-      let theme_message_currentuser = "chat-currentuser-dark";
-      let theme_message_otheruser = "chat-otheruser-dark";
-
-      if($('body').hasClass('light-theme')) {
-        theme_message_currentuser = "chat-currentuser-light";
-        theme_message_otheruser = "chat-otheruser-light";
-      }
-
-      let template = '<div class="row"><div class="col-sm-5"></div><div class="col-sm-7"><div class="card currentuser_message '+theme_message_currentuser+' mb-3"><div class="card-body"><h5 class="card-title">'+username+'</h5><p class="card-text">'+data.message+'</p></div></div></div></div>';
-
-      if(chat_position !== 'chat-currentuser') {
-        template = '<div class="row"><div class="col-sm-7"><div class="card otheruser_message '+theme_message_otheruser+' mb-3"><div class="card-body"><h5 class="card-title">'+username+'</h5><p class="card-text">'+data.message+'</p></div></div></div><div class="col-sm-5"></div></div>';
-      }
-
-      if(username !== 'You') {
-        if(Push.Permission.has() === true) {
-          Push.create(data.username, {
-            body: data.message,
-            onClick: function () {
-                window.focus();
-                this.close();
-            }
-          });
-        } else {
-          Push.Permission.request().then(function(onGranted) {
-            console.log(onGranted);
-          })
-          .catch(function(onDenied) {
-            console.log(onDenied);
-          });
-        }
-      }
-      
-      $('#message_area').append(template);
+      message(data.username, data.message, 'Yes');
     });
 
     socket.on('user login', function(data) {
@@ -133,6 +91,7 @@ $('#dark_light').on('click', function() {
   toggle_theme();
 });
 
+// Toggle between light/dark theme
 function toggle_theme(mode) {
   $('[data-toggle="tooltip"]').tooltip('hide');
 
@@ -177,6 +136,78 @@ function toggle_theme(mode) {
   }
 }
 
+// Get the chat messages of a room
 function get_chat_messages(room_id) {
-  console.log(room_id);
+  $.ajax({
+    type: "POST",
+    dataType: "json",
+    url: "/chatroom/chat_messages",
+    data: {
+      room_id: room_id
+    },
+    success: function(result) {
+      let messages = result;
+      for(let count = 0; count < messages.length; count ++) {
+        // Pass the username and message values to the message function
+        message(messages[count].username, messages[count].message, 'No');
+      }
+    }, 
+    error: function(error) {
+      console.log(error);
+    }
+  });
+}
+
+// Get messages and append them to the message area
+function message(username_val, message_val, notification) {
+  let current_user = $('#hidden_user').val();
+  let username = username_val;
+  let message = message_val;
+  let chat_position = "chat-otheruser";
+
+  // Check if the current user has messaged and if yes, changed to 'You' label
+  if(current_user === username) {
+    chat_position = "chat-currentuser";
+    username = "You";
+  }
+
+  // Setting dark mode as default before checking user's current theme
+  let theme_message_currentuser = "chat-currentuser-dark";
+  let theme_message_otheruser = "chat-otheruser-dark";
+
+  // Check if the user has light theme mode set
+  if($('body').hasClass('light-theme')) {
+    theme_message_currentuser = "chat-currentuser-light";
+    theme_message_otheruser = "chat-otheruser-light";
+  }
+
+  // Show current user's message in right
+  let template = '<div class="row"><div class="col-sm-5"></div><div class="col-sm-7"><div class="card currentuser_message '+theme_message_currentuser+' mb-3"><div class="card-body"><h5 class="card-title">'+username+'</h5><p class="card-text">'+message+'</p></div></div></div></div>';
+
+  // Show other user's message in left
+  if(chat_position !== 'chat-currentuser') {
+    template = '<div class="row"><div class="col-sm-7"><div class="card otheruser_message '+theme_message_otheruser+' mb-3"><div class="card-body"><h5 class="card-title">'+username+'</h5><p class="card-text">'+message+'</p></div></div></div><div class="col-sm-5"></div></div>';
+  }
+
+  // Show message notification
+  if(username !== 'You' && notification !== 'No') {
+    if(Push.Permission.has() === true) {
+      Push.create(username, {
+        body: message,
+        onClick: function () {
+            window.focus();
+            this.close();
+        }
+      });
+    } else {
+      Push.Permission.request().then(function(onGranted) {
+        console.log(onGranted);
+      })
+      .catch(function(onDenied) {
+        console.log(onDenied);
+      });
+    }
+  }
+  
+  $('#message_area').append(template);
 }

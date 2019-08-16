@@ -124,4 +124,17 @@ router.get('/room/:room_id', function(req, res, next) {
   }
 });
 
+// Get chat messages
+router.post('/chat_messages', function(req, res, next) {
+  let room_id = req.body.room_id;
+
+  room.findOne({ roomId: room_id }, function(err, result) {
+    if(err || result === null) {
+      res.send(err);
+    } else {
+      res.send(result.messages);
+    }
+  });
+});
+
 module.exports = router;
