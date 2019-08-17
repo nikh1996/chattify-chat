@@ -17,6 +17,7 @@ Demo: https://chattify-chat.herokuapp.com/
 | Retrieve previous chat messages | :heavy_check_mark: |
 | Encrypt chat messages stored in DB | :x: |
 | Allow private chat between users | :x: |
+| Add profile picture for user | :x: |
 | Allow "Add friend" functionality | :x: |
 | Allow "Block user" functionality | :x: |
 | Allow users to upload images in chat | :x: |
