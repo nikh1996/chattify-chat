@@ -3,7 +3,7 @@ A chat app created with bootstrap for front-end and socket.io, express for backe
 
 Demo: https://chattify-chat.herokuapp.com/
 
-# Chattify roadmap:
+## Chattify roadmap:
 
 | Functionality | Progress |
 | ------------- |:-------------:|
