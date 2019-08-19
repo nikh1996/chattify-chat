@@ -3,6 +3,8 @@ $(function () {
 
     let room_id = $('#hidden_room_id').val();
 
+    get_chat_messages(room_id);
+
     var socket = io();
 
     socket.emit('add user', $('#hidden_user').val());
@@ -53,7 +55,8 @@ $(function () {
         $('#message_area').append(people_online_template);
       }
 
-      get_chat_messages(room_id);
+      // Scroll to bottom whenever new messages are added
+      $("#message_area").scrollTop($("#message_area")[0].scrollHeight);
     });
 
     socket.on('user joined', function(data) {
@@ -112,6 +115,9 @@ function toggle_theme(mode) {
     $('.currentuser_message').addClass('chat-currentuser-dark').removeClass('chat-currentuser-light');
     $('.otheruser_message').addClass('chat-otheruser-dark').removeClass('chat-otheruser-light');
 
+    // Profile modal color change
+    $('#user_profile_theme_change').addClass('user-profile-dark-theme').removeClass('user-profile-light-theme');
+
     // Logout modal color change
     $('#logout_theme_change').addClass('logout-dark-theme').removeClass('logout-light-theme');
   } else {  // Light mode
@@ -130,6 +136,9 @@ function toggle_theme(mode) {
     // The user messages color change
     $('.currentuser_message').addClass('chat-currentuser-light').removeClass('chat-currentuser-dark');
     $('.otheruser_message').addClass('chat-otheruser-light').removeClass('chat-otheruser-dark');
+
+    // Profile modal color change
+    $('#user_profile_theme_change').addClass('user-profile-light-theme').removeClass('user-profile-dark-theme');
 
     // Logout modal color change
     $('#logout_theme_change').addClass('logout-light-theme').removeClass('logout-dark-theme');
@@ -161,7 +170,10 @@ function get_chat_messages(room_id) {
 // Get messages and append them to the message area
 function message(username_val, message_val, notification) {
   let current_user = $('#hidden_user').val();
+
   let username = username_val;
+  let username_template = '<h5 class="card-title"><a href="#" id="user_profile" data-toggle="modal" data-target="#user_profile_prompt" class="username_click">'+username+'</a></h5>';
+
   let message = message_val;
   let chat_position = "chat-otheruser";
 
@@ -169,6 +181,7 @@ function message(username_val, message_val, notification) {
   if(current_user === username) {
     chat_position = "chat-currentuser";
     username = "You";
+    username_template = '<h5 class="card-title">You</h5>';
   }
 
   // Setting dark mode as default before checking user's current theme
@@ -182,11 +195,11 @@ function message(username_val, message_val, notification) {
   }
 
   // Show current user's message in right
-  let template = '<div class="row"><div class="col-sm-5"></div><div class="col-sm-7"><div class="card currentuser_message '+theme_message_currentuser+' mb-3"><div class="card-body"><h5 class="card-title">'+username+'</h5><p class="card-text">'+message+'</p></div></div></div></div>';
+  let template = '<div class="row"><div class="col-sm-5"></div><div class="col-sm-7"><div class="card currentuser_message '+theme_message_currentuser+' mb-3"><div class="card-body">'+username_template+'<p class="card-text">'+message+'</p></div></div></div></div>';
 
   // Show other user's message in left
   if(chat_position !== 'chat-currentuser') {
-    template = '<div class="row"><div class="col-sm-7"><div class="card otheruser_message '+theme_message_otheruser+' mb-3"><div class="card-body"><h5 class="card-title">'+username+'</h5><p class="card-text">'+message+'</p></div></div></div><div class="col-sm-5"></div></div>';
+    template = '<div class="row"><div class="col-sm-7"><div class="card otheruser_message '+theme_message_otheruser+' mb-3"><div class="card-body">'+username_template+'<p class="card-text">'+message+'</p></div></div></div><div class="col-sm-5"></div></div>';
   }
 
   // Show message notification
@@ -210,4 +223,11 @@ function message(username_val, message_val, notification) {
   }
   
   $('#message_area').append(template);
+
+  // Scroll to bottom whenever new messages are added
+  $("#message_area").scrollTop($("#message_area")[0].scrollHeight);
 }
+
+$('#user_profile_prompt').on('shown.bs.modal', function() {
+  console.log(this);
+})

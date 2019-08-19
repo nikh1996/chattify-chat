@@ -39,8 +39,10 @@
   </div>
   <!-- END -- Mobile interface -->
 
+  <!-- START -- Message area -->
   <div class="container-fluid chat-area-light" id='message_area'>
   </div>
+  <!-- END -- Message area -->
 
   <input type="hidden" id="hidden_room_id" value="<%= room_id %>">
   <input type="hidden" id="hidden_user" value="<%= user %>">
@@ -59,6 +61,24 @@
       <p id="dark_light_sr" hidden>Switch between light mode or dark mode</p>
     </div>
   </div>
+
+  <!-- START -- Show user profile -->
+  <div class="modal" tabindex="-1" role="dialog" id="user_profile_prompt">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content user-profile-light-theme" id="user_profile_theme_change">
+            <div class="modal-header">
+              <img src="/images/smiley.png" class="rounded-circle profile-picture-modal mx-auto d-block" alt="">
+            </div>
+            <div class="modal-body text-center">
+                <h1>User</h1>
+                <button type="button" class="btn btn-primary btn-full-width"><i class="far fa-comment"></i>&nbsp;&nbsp;&nbsp;Start private chat!</button>
+                <button type="button" class="btn btn-success btn-full-width"><i class="far fa-grin-beam"></i>&nbsp;&nbsp;&nbsp;Add to friend list!</button>
+                <button type="button" class="btn btn-danger btn-full-width"><i class="far fa-angry"></i>&nbsp;&nbsp;&nbsp;Block this user!</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- END -- Show user profile -->
 </body>
 
 <% include ./includes/logout.ejs %>

@@ -68,3 +68,34 @@
 .xs_margin_bottom {
     margin-bottom: 1vh;
 }
+
+.username_click, .username_click:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.profile-picture-modal {
+    width: 10vw;
+    height: 10vw;
+}
+
+.user-profile-light-theme > .modal-header {
+    background: linear-gradient(90deg, blue, darkblue);
+    border-radius: 0;
+}
+
+.user-profile-light-theme > .modal-body {
+    background: #fff;
+    color: #000;
+}
+
+.user-profile-dark-theme > .modal-header {
+    background: linear-gradient(90deg, #000f1d, #000);
+    border-radius: 0;
+    border-bottom: 1px;
+}
+
+.user-profile-dark-theme > .modal-body {
+    background: #000f1d;
+    color: white;
+}
